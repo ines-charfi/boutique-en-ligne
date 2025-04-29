@@ -9,7 +9,7 @@
             <div id="autocomplete-list" class="autocomplete-items"></div>
         </div>
         <nav>
-            <a href="index.php?page=inscription" class="btn">Inscription</a>
+            <a href="inscription.php" class="btn">Inscription</a>
             <a href="index.php?page=connexion" class="btn">Connexion</a>
         </nav>
        

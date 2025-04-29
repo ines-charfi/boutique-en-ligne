@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boutique en ligne</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="/public/js/main.js"></script>
+    <link rel="stylesheet" href="assets\css\style.css">
+    <script src="assets\js\main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/public/js/livre.js"></script>
-    <script src="/public/js/boutique.js"></script>
+  
 </head>
 <body>
     
 
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php include  'views\layout\header.php'; ?>
 
 <div class="container">
     <div class="livre-detail">
-        <img src="/public/images/<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
+        <img src="assets\images<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
         <div>
             <h2><?= htmlspecialchars($livre['titre']) ?></h2>
             <p>Auteur : <?= htmlspecialchars($livre['auteur']) ?></p>
@@ -39,5 +38,5 @@
 
 
 </body>
-<?php include   '/../layout/footer.php'; ?>
+ <?php include   'views\layout\footer.php'; ?>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boutique en ligne</title>
     <link rel="stylesheet" href="assets\css\style.css">
-    <script src="assets/js/main.js"></script>
+    <script src="assets\js\main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@ session_start();
 
 // Inclusion des modèles
 require_once  'models\Livre.php';
-require_once 'Models/Categorie.php';
+require_once 'models\categorie.php';
 
 
 // Récupération de la page demandée
@@ -62,18 +62,18 @@ switch ($page) {
 
     // Inscription / Connexion / Déconnexion utilisateur
     case 'inscription':
-        (new UtilisateurController())->inscription();
+        (new UserController())->inscription();
         break;
     case 'connexion':
-        (new UtilisateurController())->connexion();
+        (new UserController())->connexion();
         break;
     case 'deconnexion':
-        (new UtilisateurController())->deconnexion();
+        (new UserController())->deconnexion();
         break;
 
     // Profil utilisateur
     case 'profil':
-        (new UtilisateurController())->profil();
+        (new UserController())->profil();
         break;
 
     // Gestion du panier et commandes
@@ -122,6 +122,7 @@ switch ($page) {
         echo "Page non trouvée";
 }
 ?>
-<?php include 'views\layout\footer.php'; ?>
+
 </body>
+<?php include 'views\layout\footer.php'; ?>
 </html>
