@@ -1,5 +1,5 @@
 <?php
-require_once 'Model/connexionModel.php';
+require_once __DIR__ . 'Model/connexionModel.php';
 
 class ConnexionController {
     private $model;

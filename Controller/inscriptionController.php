@@ -1,5 +1,5 @@
 <?php
-require_once 'Model/inscriptionModel.php';
+require_once __DIR__ . 'Model/inscriptionModel.php';
 
 class InscriptionController {
     private $model;
