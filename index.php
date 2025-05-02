@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,6 +131,3 @@ switch ($page) {
 </body>
 
 </html>
-=======
-<?php echo "bonjour"?>
->>>>>>> origin/dev
