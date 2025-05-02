@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boutique en ligne</title>
     <link rel="stylesheet" href="assets\css\style.css">
-    <script src="assets\js\main.js"></script>
+    <script src="assets\js\main.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<?php include 'views\layout\header.php'; ?>
+
     
-    <h1>Bienvenue à notre librairie en ligne NERINAL BOOK</h1>
-    <p>Découvrez notre sélection de livres, de la littérature classique aux dernières nouveautés.</p>
-    <p>Nous avons quelque chose pour chaque lecteur.</p>
-    <p>Parcourez notre collection et trouvez votre prochain livre préféré !</p>
+    
 <?php
 
 // Inclusion de la base de données
@@ -24,8 +21,16 @@ require_once  './config/database.php';
 session_start();
 
 // Inclusion des modèles
-require_once  'models\Livre.php';
-require_once 'models\categorie.php';
+require_once  'model\Livre.php';
+require_once 'model\categorie.php';
+require_once 'model\User.php';
+
+
+// Inclusion des contrôleurs
+require_once 'controller\AccueilController.php';
+require_once 'controller\LivreController.php';
+require_once 'controller\UserController.php';
+
 
 
 // Récupération de la page demandée
@@ -124,5 +129,5 @@ switch ($page) {
 ?>
 
 </body>
-<?php include 'views\layout\footer.php'; ?>
+
 </html>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         let div = document.createElement('div');
                         div.className = 'book-card';
                         div.innerHTML = `
-                            <img src="/public/images/${livre.image}" alt="${livre.titre}">
+                            <img src="assets\images${livre.image}" alt="${livre.titre}">
                             <h3>${livre.titre}</h3>
                             <p>${livre.auteur}</p>
                             <div class="price">${parseFloat(livre.prix).toFixed(2)} €</div>
