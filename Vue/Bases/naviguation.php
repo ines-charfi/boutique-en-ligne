@@ -10,22 +10,7 @@
                     <a class="nav-link active" href="index.php">Accueil</a>
                 </li>
                 
-                <?php
-                // Vous pouvez récupérer dynamiquement les catégories depuis la base de données
-                // Pour le moment, on utilise des catégories statiques
-                $categories = [
-                    ['id' => 1, 'nom' => 'Électronique'],
-                    ['id' => 2, 'nom' => 'Mode'],
-                    ['id' => 3, 'nom' => 'Maison & Jardin'],
-                    ['id' => 4, 'nom' => 'Sports & Loisirs'],
-                ];
                 
-                foreach ($categories as $categorie) {
-                    echo '<li class="nav-item">';
-                    echo '<a class="nav-link" href="index.php?action=categorie&id=' . $categorie['id'] . '">' . htmlspecialchars($categorie['nom']) . '</a>';
-                    echo '</li>';
-                }
-                ?>
                 
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=promotions">Promotions</a>

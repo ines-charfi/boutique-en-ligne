@@ -1,5 +1,5 @@
-<?php require_once __DIR__ . 'Vue/Bases/header.php'; ?>
-<?php require_once __DIR__ . 'Vue/Bases/navigation.php'; ?>
+<?php require_once __DIR__ . '/Bases/header.php'; ?>
+<?php require_once __DIR__ . '/Bases/naviguation.php'; ?>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
