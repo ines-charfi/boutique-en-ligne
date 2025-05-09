@@ -15,7 +15,7 @@
 <button class="btn" onclick="window.location.href='index.php'">Retour à l'accueil</button>
 
 <div class="container">
-    <h2>Notre sélection pour tous !</h2>
+    <h2>Notre sélection pour tous !</h2><br>
     <div class="filtre-categories">
         <button class="btn-filtre" data-id="0">Toutes les catégories</button>
         <?php foreach($categories as $cat): ?>
@@ -36,6 +36,18 @@
             </div>
         <?php endforeach; ?>
     </div>
+    <!-- Pagination -->
+<div class="pagination">
+<?php for($i=1; $i<=$nbPages; $i++): ?>
+    <a href="index.php?page=boutique<?= $categorie_id ? '&categorie_id=' . $categorie_id : '' ?>&page_num=<?= $i ?>"
+       class="<?= ($i == $page) ? 'active' : '' ?>">
+        <?= $i ?>
+    </a>
+<?php endfor; ?>
+
+</div>
+    
+       
 </div>
 
 

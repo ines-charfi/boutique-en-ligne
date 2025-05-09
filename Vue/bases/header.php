@@ -3,7 +3,7 @@
         <div class="logo-container">
             <img src="assets/images/MERINAL_BOOK.png" alt="Logo NERINAL BOOK" class="logo" width="100" height="100">
         </div>
-        <h1 class="site-title"> |NERINAL BOOK</h1>
+        <h1 class="site-title"> <b> |MERINAL BOOK</b></h1>
       <!-- Barre de recherche -->
     <div class="search-container">
         <input type="text" id="search-input" placeholder="Rechercher un livre...">

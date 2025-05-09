@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once 'model/Livre.php';
 require_once 'model/User.php';
 require_once 'model/Categorie.php';
@@ -40,21 +40,20 @@ class CommandeController {
 // Removed duplicate method declaration
 // Page de validation de commande
 
-  public function ajouterPanier() {
-        if (!isset($_SESSION['panier'])) {
-            $_SESSION['panier'] = [];
-        }
-        $livre_id = $_POST['livre_id'];
-        $quantite = $_POST['quantite'];
-        // Vérifier si le produit existe déjà
-        if (isset($_SESSION['panier'][$livre_id])) {
-            $_SESSION['panier'][$livre_id] += $quantite;
-        } else {
-            $_SESSION['panier'][$livre_id] = $quantite;
-        }
-        header('Location: index.php?page=boutique');
-        exit;
+public function ajouterPanier() {
+    if (!isset($_SESSION['panier'])) {
+        $_SESSION['panier'] = [];
     }
+    $livre_id = $_POST['livre_id'];
+    $quantite = $_POST['quantite'];
+    if (isset($_SESSION['panier'][$livre_id])) {
+        $_SESSION['panier'][$livre_id] += $quantite;
+    } else {
+        $_SESSION['panier'][$livre_id] = $quantite;
+    }
+    header('Location: index.php?page=boutique');
+    exit;
+}
     public function validerCommande() {
         // Logic to validate the order
         echo "Commande validée avec succès.";

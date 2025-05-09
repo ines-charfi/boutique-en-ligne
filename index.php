@@ -18,7 +18,7 @@
 require_once  './config/database.php';
 // Inclusion de la classe de base de données
  
-session_start();
+
 
 // Inclusion des modèles
 require_once  'model\Livre.php';
@@ -30,6 +30,9 @@ require_once 'model\User.php';
 require_once 'controller\AccueilController.php';
 require_once 'controller\LivreController.php';
 require_once 'controller\UserController.php';
+require_once 'controller\CommandeController.php';
+
+
 
 
 

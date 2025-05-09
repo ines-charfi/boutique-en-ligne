@@ -30,6 +30,8 @@ class Livre {
         $stmt->execute(['%' . $term . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Removed duplicate getAll method to avoid redeclaration error.
+    // Removed duplicate getByCategorie method to avoid redeclaration error.
 
     // Tous les livres
     public static function getAll() {
@@ -90,8 +92,56 @@ class Livre {
         $stmt->execute($ids);
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Return books as an associative array
     }
-  
+    public static function getSimilaires($categorie_id, $exclude_id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ? AND id != ? LIMIT 5");
+        $stmt->execute([$categorie_id, $exclude_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Removed duplicate ajouterAvis method to avoid redeclaration error.
+    public function ajouterAvis() {
+        // Assuming you have a database connection and the necessary data from the form
+        $livre_id = $_POST['livre_id'];
+        $note = $_POST['note'];
+        $commentaire = $_POST['commentaire'];
+        $user_id = $_SESSION['user_id']; // Assuming user ID is stored in session
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("INSERT INTO avis (livre_id, user_id, note, commentaire) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$livre_id, $user_id, $note, $commentaire]);
+        // Optionally, you can also update the average rating of the book here
+    }
+    public static function getPaginated($offset, $limit) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM livre LIMIT ?, ?");
+        $stmt->bindValue(1, (int)$offset, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public static function countAll() {
+        $pdo = getPDO();
+        $stmt = $pdo->query("SELECT COUNT(*) FROM livre");
+        return $stmt->fetchColumn();
+    }
+    public static function getPaginatedByCategorie($categorie_id, $offset, $limit) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ? LIMIT ?, ?");
+        $stmt->bindValue(1, $categorie_id, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+        $stmt->bindValue(3, (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public static function countByCategorie($categorie_id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM livre WHERE categorie_id = ?");
+        $stmt->execute([$categorie_id]);
+        return $stmt->fetchColumn();
+    }
+    
+    
 }
 
 ?>
