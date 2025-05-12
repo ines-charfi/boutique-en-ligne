@@ -23,15 +23,15 @@ class Categorie {
         
         $tree = [];
         foreach ($categories as $category) {
-            if ($category['parentid'] == 0) {
+            if ($category['id'] == 0) {
                 $tree[$category['id']] = $category;
                 $tree[$category['id']]['children'] = [];
             }
         }
         
         foreach ($categories as $category) {
-            if ($category['parentid'] != 0) {
-                $tree[$category['parentid']]['children'][] = $category;
+            if ($category['id'] != 0) {
+                $tree[$category['id']][] = $category;
             }
         }
         

@@ -898,4 +898,103 @@ p {
 .category-tree .parent {
     font-weight: bold;
 }
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fffbe6;
+    margin: 2rem 0 1rem 0;
+    box-shadow: 0 4px 18px rgba(34,113,61,0.09);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 1.07em;
+}
+
+.table th, .table td {
+    padding: 1rem 0.7rem;
+    text-align: center;
+    border-bottom: 1.5px solid #ffe066;
+    font-size: 1.08em;
+    transition: background 0.2s;
+}
+
+.table th {
+    background: #ffe066;
+    color: #222;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+}
+
+.table tr {
+    background: #fff;
+}
+
+.table tr:hover td {
+    background: #fffde6;
+}
+
+.table .btn {
+    padding: 0.3em 0.7em;
+    border-radius: 6px;
+    font-size: 0.95em;
+    margin: 0 2px;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-warning, .btn-warning:visited {
+    background: #ffe066;
+    color: #845422;
+}
+.btn-warning:hover {
+    background: #e6b800;
+    color: #fff;
+}
+
+.btn-danger, .btn-danger:visited {
+    background: #ff5c5c;
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #d32f2f;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .table th, .table td {
+        padding: 0.7rem 0.3rem;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 700px) {
+    .table, .table thead, .table tbody, .table th, .table td, .table tr {
+        display: block;
+        width: 100%;
+    }
+    .table thead {
+        display: none;
+    }
+    .table tr {
+        margin-bottom: 1.2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(34,113,61,0.09);
+        background: #fffde6;
+    }
+    .table td {
+        text-align: left;
+        padding: 0.7rem 1.2rem;
+        border: none;
+        position: relative;
+    }
+    .table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #b09407;
+        display: block;
+        margin-bottom: 0.3em;
+    }
+}
+
 

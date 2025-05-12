@@ -70,7 +70,15 @@ class Avis {
             $result = $query->fetch();
             return $result['total'];
         }
- }
+ 
+
+    public static function delete($id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("DELETE FROM avis WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+}
+ 
 
 
     

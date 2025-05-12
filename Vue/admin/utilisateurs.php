@@ -11,8 +11,10 @@
 </head>
 <body>
     
-<?php include 'Vue/bases/header.php'; ?>
-<?php include 'Vue/bases/nav-admin.php'; ?>
+<?php include 'Vue/bases/header.php'; ?><br>
+<a href="index.php?page=admin_dashboard" class="btn btn-primary">Retour au tableau de bord</a>
+<br>
+
 
 <div class="container">
     <h2>Liste des utilisateurs</h2>

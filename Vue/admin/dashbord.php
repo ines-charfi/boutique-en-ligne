@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<?php include  'Vue/header.php'; ?>
+<?php include  'Vue\bases\header.php'; ?>
 
 <div class="container">
     <h2>Tableau de bord administrateur</h2>
@@ -23,6 +23,6 @@
     </ul>
 </div>
 
-<?php include  'Vue/footer.php'; ?>
+<?php include  'Vue\bases\footer.php'; ?>
 </body>
 </html>

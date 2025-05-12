@@ -1,3 +1,6 @@
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/searsh.js"></script>
 <header class="site-header">
     <div class="container header-flex">
         <div class="logo-container">

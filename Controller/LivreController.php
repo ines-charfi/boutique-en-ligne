@@ -10,42 +10,47 @@ class LivreController {
 
     // AJAX : filtrer par catégorie
   // Exemple dans LivreController.php// Autocomplétion AJAX
-  public function autocomplete() {
-    header('Content-Type: application/json');
-    $term = $_GET['term'] ?? '';
-    $pdo = getPDO();
-    $stmt = $pdo->prepare("SELECT id, titre, auteur, image FROM livre WHERE titre LIKE ? LIMIT 7");
-    $stmt->execute(['%' . $term . '%']);
-    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-    exit();
-}
 
 
-// Filtrage AJAX par catégorie
-// Dans LivreController.php
-public function filtrer() {
-    header('Content-Type: application/json');
-    try {
-             $categorie_id = isset($_GET['categorie_id']) ? (int)$_GET['categorie_id'] : 0;
-
-        if ($categorie_id < 0) {
-            throw new Exception("ID de catégorie invalide");
-        }
-
+    // Autocomplétion AJAX pour la recherche de livres
+    public function autocomplete() {
+        header('Content-Type: application/json');
+        $term = $_GET['term'] ?? '';
         $pdo = getPDO();
-        if ($categorie_id > 0) {
-            $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ?");
-            $stmt->execute([$categorie_id]);
-        } else {
-            $stmt = $pdo->query("SELECT * FROM livre");
-        }
+        $stmt = $pdo->prepare(
+            "SELECT id, titre, auteur, image 
+             FROM livre 
+             WHERE titre LIKE ? 
+             LIMIT 7"
+        );
+        $stmt->execute(['%' . $term . '%']);
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-    } catch (Exception $e) {
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
+        exit();
     }
-    exit();
-}
+
+    // Filtrage AJAX des livres par catégorie
+    public function filtrer() {
+        header('Content-Type: application/json');
+        try {
+            $categorieid = isset($_GET['categorie_id']) ? (int)$_GET['categorie_id'] : 0;
+            $pdo = getPDO();
+            if ($categorieid > 0) {
+                $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorieid = ?");
+                $stmt->execute([$categorieid]);
+            } else {
+                $stmt = $pdo->query("SELECT * FROM livre");
+            }
+            echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        exit();
+    }
+
+
+
+
 
 
 

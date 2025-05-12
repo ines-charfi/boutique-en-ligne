@@ -140,14 +140,14 @@ class Livre {
  // Dans Livre.php
 public static function getByCategorie($categorie_id) {
     $pdo = getPDO();
-    $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorieid = ?"); // Nom exact de la colonne
+    $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ?"); // Nom exact de la colonne
     $stmt->execute([$categorie_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
     
         public static function getByCategorieAndId($categorie_id, $livre_id) {
             $pdo = getPDO();
-            $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorieid = ? AND id = ?"); // Nom exact de la colonne
+            $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ? AND id = ?"); // Nom exact de la colonne
             $stmt->execute([$categorie_id, $livre_id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
@@ -159,7 +159,7 @@ public static function getAllWithCategories() {
     $stmt = $pdo->query("
         SELECT l.*, c.nom as categorie 
         FROM livre l
-        LEFT JOIN categorie c ON l.categorieid = c.id
+        LEFT JOIN categorie c ON l.categorie_id = c.id
     ");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -168,8 +168,8 @@ public static function create($data) {
     $pdo = getPDO();
     $stmt = $pdo->prepare("
         INSERT INTO livre 
-        (titre, auteur, prix, stock, categorieid, image)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (titre, auteur, prix, stock,categorie_id, image)
+        VALUES (?, ?, ?, ?, ?,?)
     ");
     return $stmt->execute([
         $data['titre'],

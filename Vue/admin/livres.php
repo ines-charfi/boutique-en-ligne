@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets\css\style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 
@@ -12,12 +12,15 @@
 <body>
     
 
-<?php include '../bases/header.php'; ?>
+<?php include 'Vue/bases/header.php'; ?><br>
+<a href="index.php?page=admin_dashboard" class="btn btn-primary">Retour au tableau de bord</a>
+<br>
 
 <div class="container mt-4">
-    <h2>Gestion des Livres</h2>
-    <a href="index.php?page=add_livre" class="btn btn-success mb-3">➕ Ajouter un livre</a>
-
+    <h2>Gestion des Livres</h2><br>
+    <p>Voici la liste des livres disponibles dans la boutique. Vous pouvez ajouter, modifier ou supprimer des livres.</p><br>
+    <a href="index.php?page=add_livre" class="btn btn-success mb-3">➕ Ajouter un livre</a><br>
+<br>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -31,27 +34,29 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($livres as $livre): ?>
-            <tr>
-                <td><?= $livre['id'] ?></td>
-                <td><?= htmlspecialchars($livre['titre']) ?></td>
-                <td><?= htmlspecialchars($livre['auteur']) ?></td>
-                <td><?= number_format($livre['prix'], 2) ?> €</td>
-                <td><?= $livre['stock'] ?></td>
-                <td><?= $livre['categorie'] ?? 'Non catégorisé' ?></td>
-                <td>
-                    <a href="index.php?page=edit_livre&id=<?= $livre['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                    <a href="index.php?page=delete_livre&id=<?= $livre['id'] ?>" 
-                       class="btn btn-sm btn-danger" 
-                       onclick="return confirm('Êtes-vous sûr ?')">🗑️</a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
+            <!-- Boucle pour afficher les livres -->
+<?php foreach ($livres as $livre): ?>
+<tr>
+    <td data-label="ID"><?= $livre['id'] ?></td>
+    <td data-label="Titre"><?= htmlspecialchars($livre['titre']) ?></td>
+    <td data-label="Auteur"><?= htmlspecialchars($livre['auteur']) ?></td>
+    <td data-label="Prix"><?= number_format($livre['prix'], 2) ?> €</td>
+    <td data-label="Stock"><?= $livre['stock'] ?></td>
+    <td data-label="Catégorie"><?= $livre['categorie'] ?? 'Non catégorisé' ?></td>
+    <td data-label="Actions">
+        <a href="index.php?page=livre_detail&id=<?= $livre['id'] ?>" class="btn btn-sm btn-info">👁️</a>
+        <a href="index.php?page=edit_livre&id=<?= $livre['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
+        <a href="index.php?page=delete_livre&id=<?= $livre['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr ?')">🗑️</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+
+      
     </table>
 </div>
 
-<?php include '../bases/footer.php'; ?>
+<?php include 'Vue/bases/footer.php'; ?>
 <script src="assets/js/admin.js"></script>
 </body>
 </html>

@@ -27,13 +27,14 @@ require_once 'model\Commande.php';
 require_once 'model\Avis.php';
 
 
-
 // Inclusion des contrôleurs
 require_once 'controller\AccueilController.php';
 require_once 'controller\LivreController.php';
 require_once 'controller\UserController.php';
 require_once 'controller\CommandeController.php';
 require_once 'controller\AdminController.php';
+// Inclusion de la session
+
 
 
 
