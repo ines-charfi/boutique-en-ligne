@@ -9,8 +9,6 @@
 </head>
 <body>
 
-    
-    
 <?php
 
 // Inclusion de la base de données
