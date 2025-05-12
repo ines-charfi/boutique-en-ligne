@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boutique en ligne</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style1.css">
     <script src="assets/js/boutique.js"></script>
     <script scr="assets/js/filters.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
