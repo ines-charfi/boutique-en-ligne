@@ -1,0 +1,281 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #fffbe6; /* Jaune pâle */
+    color: #222;
+}
+
+/* Centrage global des titres et paragraphes */
+h1, h2, h3, h4, h5, h6, p {
+ 
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
+    
+}
+
+/* Header/Footer */
+.site-header, .site-footer {
+    background: #222222;
+    color: #fff;
+    padding: 1.2rem 0;
+    text-align: center;
+}
+
+/* Boutons principaux */
+.btn, .btn-filtre, .filter-category {
+    background: #22713d; /* Vert foncé */
+    color: #fff;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 25px;
+    margin: 0.3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(34,113,61,0.09);
+    transition: background 0.25s, transform 0.15s, box-shadow 0.15s;
+    outline: none;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    display: inline-block;
+    animation: fadeIn 0.6s;
+}
+.btn:hover, .btn-filtre:hover, .filter-category:hover {
+    background: #845422; /* Marron foncé */
+    color: #ffe066;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 18px rgba(132,84,34,0.13);
+}
+.btn:active, .btn-filtre:active, .filter-category:active {
+    background: #4d2e00;
+    color: #fffbe6;
+    transform: scale(0.97);
+}
+
+/* Bouton secondaire marron */
+.btn-marron {
+    background: #845422;
+    color: #fffbe6;
+}
+.btn-marron:hover {
+    background: #22713d;
+    color: #ffe066;
+}
+
+/* Grille responsive */
+.books-grid, .livres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    animation: fadeIn 0.7s;
+}
+
+/* Cartes produits animées */
+.book-card, .livre-card {
+    background: #fffde6;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(34,113,61,0.09);
+    padding: 1.2rem 1rem 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.22s, box-shadow 0.22s;
+    animation: fadeIn 0.7s;
+    border: 2px solid #ffe066;
+}
+.book-card:hover, .livre-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 28px rgba(132,84,34,0.16);
+    border-color: #845422;
+}
+.book-card img, .livre-card img {
+    width: 110px;
+    height: 170px;
+    object-fit: cover;
+    margin-bottom: 0.7rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(34,113,61,0.09);
+}
+.price {
+    color: #b38705;
+    font-weight: bold;
+    margin-top: 0.6rem;
+    font-size: 1.1em;
+}
+
+/* Filtres catégories */
+.filtre-categories, .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    margin: 1.5rem 0 1rem 0;
+}
+
+/* Pagination */
+.pagination {
+    margin: 2em 0;
+    text-align: center;
+}
+.pagination a {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 7px 13px;
+    background: #ffe066;
+    color: #222;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+}
+.pagination a.active,
+.pagination a:hover {
+    background: #845422;
+    color: #fffbe6;
+}
+.pagination a.disabled {
+    background: #ddd;
+    color: #aaa;
+    pointer-events: none;
+}
+
+/* Autocomplétion stylée */
+#autocomplete-results {
+    position: absolute;
+    background: #fffbe6;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(132,84,34,0.14);
+    z-index: 1000;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #ffe066;
+    border-top: none;
+}
+.autocomplete-item {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.18s;
+}
+.autocomplete-item:hover {
+    background: #ffe066;
+    color: #845422;
+}
+.autocomplete-item img {
+    width: 38px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.livre-similaire {
+    margin-top: 2em;
+    overflow-x: auto;
+}
+
+.livre-cards {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 180px;
+    align-items: center;
+    column-gap: 60px;           /* Espace horizontal entre les cartes */
+    row-gap: 0;                 /* Pas d’espace vertical */
+    align-items: stretch;
+    overflow-x: auto;
+    margin: 0 auto;
+    padding-bottom: 14px;
+}
+
+.livre-cards::-webkit-scrollbar {
+    width: 8px;
+    background: #222; /* Fond de la scrollbar */
+}
+
+.livre-cards::-webkit-scrollbar-thumb {
+    background: #ffe066;
+    border-radius: 10px;
+}
+.livre-card img {
+    
+    margin: 0 auto 8px auto;
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(34,113,61,0.09);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.livre-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.livre-card .btn {
+    display: block;
+    margin: 12px auto 0 auto;
+    min-width: 120px;
+}
+.livre-card .btn-marron {
+    background: #845422;
+    color: #fffbe6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .books-grid, .livres-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .book-card img, .livre-card img {
+        width: 80px;
+        height: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .books-grid, .livres-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .filtre-categories, .category-filters {
+        gap: 0.2rem;
+    }
+}
+@media (max-width: 700px) {
+    .livre-cards {
+        grid-auto-columns: 120px;
+        gap: 10px;
+    }
+}
+@media (max-width: 500px) {
+    .livre-cards {
+        grid-auto-columns: 100px;
+        gap: 8px;
+    }
+}
+@media (max-width: 400px) {
+    .livre-cards {
+        grid-auto-columns: 80px;
+        gap: 6px;
+    }
+}
+/* Styles pour les formulaires */
+
+
+/* Centrage des utilitaires */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }

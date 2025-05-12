@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/boutique.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/main.js"></script>
+  
 </head>
 <body>
     
@@ -15,20 +15,22 @@
 <button class="btn" onclick="window.location.href='index.php'">Retour à l'accueil</button>
 
 <div class="container">
-    <h2>Notre sélection pour tous !</h2><br>
+    <h2>Notre sélection pour tous !</h2><BR>
     <div class="filtre-categories">
-        <button class="btn-filtre" data-id="0">Toutes les catégories</button>
-        <?php foreach($categories as $cat): ?>
-            <button class="btn-filtre" data-id="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['nom']) ?></button>
-        <?php endforeach; ?>
-    </div>
+    <button class="btn-filtre" data-id="0">Toutes les catégories</button>
+    <?php foreach($categories as $cat): ?>
+        <button class="btn-filtre" data-id="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['nom']) ?></button>
+    <?php endforeach; ?>
+</div>
+
+
     <div id="livres-grid" class="books-grid">
         <?php foreach($livres as $livre): ?>
             <div class="book-card">
                 <img src="assets/images\<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
                 <h3><?= htmlspecialchars($livre['titre']) ?></h3>
                 <p><?= htmlspecialchars($livre['auteur']) ?></p>
-                <p><?= htmlspecialchars($livre['description']) ?></p>
+           
                
 
                 <div class="price"><?= number_format($livre['prix'], 2) ?> €</div><br>

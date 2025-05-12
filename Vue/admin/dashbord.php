@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <link rel="stylesheet" href="assets/css/admin.css">
+
 </head>
 <body>
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php include  'Vue/header.php'; ?>
 
 <div class="container">
     <h2>Tableau de bord administrateur</h2>
@@ -23,6 +23,6 @@
     </ul>
 </div>
 
-<?php include __DIR__ . '/../layout/footer.php'; ?>
+<?php include  'Vue/footer.php'; ?>
 </body>
 </html>

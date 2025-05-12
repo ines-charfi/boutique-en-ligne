@@ -5,10 +5,11 @@
         </div>
         <h1 class="site-title"> <b> |MERINAL BOOK</b></h1>
       <!-- Barre de recherche -->
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Rechercher un livre...">
-        <div id="autocomplete-results"></div>
-    </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Rechercher un livre...">
+            <div id="autocomplete-results"></div>
+        </div>
+
         <nav>
             <a href="index.php?page=inscription" class="btn">Inscription</a>
             <a href="index.php?page=connexion" class="btn">Connexion</a>

@@ -24,12 +24,7 @@ class Livre {
     }
 
     // Recherche autocomplétion
-    public static function search($term) {
-        $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT id, titre FROM livre WHERE titre LIKE ? LIMIT 5");
-        $stmt->execute(['%' . $term . '%']);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // Removed duplicate search method to avoid redeclaration error.
     // Removed duplicate getAll method to avoid redeclaration error.
     // Removed duplicate getByCategorie method to avoid redeclaration error.
 
@@ -41,12 +36,7 @@ class Livre {
     }
 
     // Livres par catégorie
-    public static function getByCategorie($categorie_id) {
-        $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorie_id = ?");
-        $stmt->execute([$categorie_id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // Removed duplicate getByCategorie method to avoid redeclaration error.
 
     // Détail d'un livre
     public static function getById($id) {
@@ -140,8 +130,63 @@ class Livre {
         $stmt->execute([$categorie_id]);
         return $stmt->fetchColumn();
     }
+    public static function search($term) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT id, titre, image FROM livre WHERE titre LIKE ? LIMIT 5");
+        $stmt->execute(['%' . $term . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
-    
+ // Dans Livre.php
+public static function getByCategorie($categorie_id) {
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorieid = ?"); // Nom exact de la colonne
+    $stmt->execute([$categorie_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+    
+        public static function getByCategorieAndId($categorie_id, $livre_id) {
+            $pdo = getPDO();
+            $stmt = $pdo->prepare("SELECT * FROM livre WHERE categorieid = ? AND id = ?"); // Nom exact de la colonne
+            $stmt->execute([$categorie_id, $livre_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        // Removed duplicate create method to avoid redeclaration error.
+        
+// Removed duplicate search method to avoid redeclaration error.
+public static function getAllWithCategories() {
+    $pdo = getPDO();
+    $stmt = $pdo->query("
+        SELECT l.*, c.nom as categorie 
+        FROM livre l
+        LEFT JOIN categorie c ON l.categorieid = c.id
+    ");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public static function create($data) {
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("
+        INSERT INTO livre 
+        (titre, auteur, prix, stock, categorieid, image)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ");
+    return $stmt->execute([
+        $data['titre'],
+        $data['auteur'],
+        $data['prix'],
+        $data['stock'],
+        $data['categorieid'],
+        $data['image']
+    ]);
+}
+
+public static function delete($id) {
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("DELETE FROM livre WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+}
+
 
 ?>

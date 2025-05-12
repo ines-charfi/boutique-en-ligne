@@ -6,6 +6,8 @@
     <title>boutique en ligne</title>
     <link rel="stylesheet" href="assets\css\style.css">
     <script src="assets\js\main.js"></script>
+    <script src="assets\js\boutique.js"></script>
+    <script src="assets\js\panier.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 </head>
@@ -16,18 +18,20 @@
     <p>Découvrez notre sélection de livres, de la littérature classique aux dernières nouveautés.</p><br>
     <div class="livre-detail">
         <img src="assets\images/<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
-        <div>
+        <div class="livre-card">
             <h2><?= htmlspecialchars($livre['titre']) ?></h2>
             <p>Auteur : <?= htmlspecialchars($livre['auteur']) ?></p>
             <p>Année : <?= htmlspecialchars($livre['annee_publication']) ?></p>
             <p>Description : <?= htmlspecialchars($livre['description']) ?></p>
             <p>Stock : <?= htmlspecialchars($livre['stock']) ?> exemplaires</p>
             <p>Prix : <?= number_format($livre['prix'], 2) ?> €</p>
+           <!-- Supprimer tout JavaScript inutile -->
             <form method="post" action="index.php?page=ajouter_panier">
                 <input type="hidden" name="livre_id" value="<?= $livre['id'] ?>">
                 <input type="number" name="quantite" value="1" min="1" max="<?= $livre['stock'] ?>">
                 <button type="submit" class="btn">Ajouter au panier</button>
             </form>
+
             </div>
         </div>
     </div>
@@ -92,7 +96,7 @@
     </div>
 
     <div class="livre-similaire">
-        <h3>Livres similaires</h3>
+        <h3>Livres similaires</h3><br>
         <div class="livre-cards">
             <?php foreach($livres_similaires as $similaire): ?>
             <div class="livre-card">
@@ -101,9 +105,11 @@
                 <p>Auteur : <?= htmlspecialchars($similaire['auteur']) ?></p>
                 <p>Prix : <?= number_format($similaire['prix'], 2) ?> €</p>
                 <form method="post" action="index.php?page=ajouter_panier">
+    <!-- Utiliser l'ID du livre similaire -->
                     <input type="hidden" name="livre_id" value="<?= $similaire['id'] ?>">
                     <button type="submit" class="btn">Ajouter au panier</button>
                 </form>
+
                 </div>
             <?php endforeach; ?>
         </div>

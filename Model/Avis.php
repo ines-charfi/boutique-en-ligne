@@ -60,5 +60,17 @@ class Avis {
         $stmt->execute([$livre_id]);
         return $stmt->fetchColumn();
     }
-}
+ 
+        // Existing methods and properties
+    
+        public static function countAll() {
+            $database = new Database();
+            $db = $database->getConnection();
+            $query = $db->query('SELECT COUNT(*) as total FROM avis');
+            $result = $query->fetch();
+            return $result['total'];
+        }
+ }
+
+
     
