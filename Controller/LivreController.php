@@ -49,18 +49,6 @@ class LivreController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     // Page détail livre
     public function detail($id) {
         $livre = Livre::getById($id);

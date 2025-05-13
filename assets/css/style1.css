@@ -229,6 +229,73 @@ h1, h2, h3, h4, h5, h6, p {
     color: #fffbe6;
 }
 
+.container {
+    max-width: 480px;
+    margin: 48px auto 0 auto;
+    background: #fffbe6;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(255, 224, 102, 0.12);
+    padding: 2.5rem 2rem 2rem 2rem;
+    text-align: center;
+}
+
+.container h2 {
+    color: #b09407;
+    margin-bottom: 2.2rem;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+.container ul li {
+    margin: 1.1rem 0;
+    text-align: center;
+}
+
+.container ul li a {
+    display: block;
+    padding: 1.1rem 0.5rem;
+    background: #ffe066;
+    border-radius: 10px;
+    color: #845422;
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(255, 224, 102, 0.08);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+    border: 1px solid #ffe066;
+}
+
+.container ul li a:hover, .container ul li a:focus {
+    background: #fffbe6;
+    color: #3d5a80;
+    box-shadow: 0 4px 16px rgba(255, 224, 102, 0.18);
+    border-color: #ffe066;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1.2rem 0.5rem;
+    }
+    .container h2 {
+        font-size: 1.3rem;
+    }
+    .container ul li a {
+        font-size: 1rem;
+        padding: 0.8rem 0.3rem;
+    }
+}
+
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px);}
@@ -279,3 +346,4 @@ h1, h2, h3, h4, h5, h6, p {
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
+.text-justify { text-align: justify; }
