@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mon profil - NERINAL BOOK</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style1.css">
 </head>
 <body>
 <?php include 'Vue/bases/header.php'; ?>

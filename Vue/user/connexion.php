@@ -1,5 +1,6 @@
 
 <?php require_once  'Vue/bases/header.php'; ?>
+<link rel="stylesheet" href="assets/css/style1.css">
 
 <div class="container mt-5">
     <div class="row justify-content-center">
