@@ -21,7 +21,7 @@
             <tr>
                 <td><?= $a['id'] ?></td>
                 <td><?= htmlspecialchars($a['livre_titre'] ?? 'Livre inconnu') ?></td>
-                <td><?= htmlspecialchars($a['utilisateur_email'] ?? 'Utilisateur inconnu') ?></td>
+                <td><?= htmlspecialchars($a['user_email'] ?? 'Utilisateur inconnu') ?></td>
                 <td><?= intval($a['note']) ?> / 5</td>
                 <td><?= htmlspecialchars($a['commentaire']) ?></td>
                 <td>

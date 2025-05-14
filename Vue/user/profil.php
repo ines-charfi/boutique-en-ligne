@@ -51,7 +51,7 @@
                     <tr>
                         <td><?= htmlspecialchars($commande['date']) ?></td>
                         <td><?= htmlspecialchars($commande['statut']) ?></td>
-                        <td><?= number_format($commande['montanttotal'], 2) ?> €</td>
+                        <td><?= number_format($commande['montant_total'], 2) ?> €</td>
                     </tr>
                 <?php endforeach; ?>
             </table>

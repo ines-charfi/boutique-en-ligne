@@ -61,11 +61,15 @@
         <p>Vous avez <?= count($panier) ?> livre(s) dans votre panier.</p>
         <p>Pour valider votre commande, cliquez sur le bouton ci-dessous.</p>
         <form method="post" action="index.php?page=valider_commande">
-            <button type="submit" class="btn">Valider la commande</button>
+             <button type="submit" class="btn btn-success">Valider ma commande</button>
         </form><br>
-        <form method="post" action="index.php?page=clear_panier">
-            <button type="submit" class="btn">Vider le panier</button>
-        </form>
+     
+        <p>Pour vider votre panier, cliquez sur le bouton ci-dessous.</p>
+        <form method="post" action="index.php?page=vider_panier">
+            <button type="submit" class="btn btn-danger">Vider le panier</button>
+
+        </form><br>
+       
     <?php endif; ?>
 </div>
 

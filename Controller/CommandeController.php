@@ -78,49 +78,129 @@ class CommandeController {
 
 
 public function validerCommande() {
+    // Vérifier que l'utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
         header('Location: index.php?page=connexion');
         exit();
     }
-    
-    try {
-        // Appel corrigé avec les bons paramètres
-        Commande::create($_SESSION['user_id'], $_SESSION['panier']);
-        unset($_SESSION['panier']);
-        header('Location: index.php?page=confirmation');
+
+    // Récupérer le panier depuis la session
+    $panier = $_SESSION['panier'] ?? [];
+    if (empty($panier)) {
+        $_SESSION['error'] = "Votre panier est vide.";
+        header('Location: index.php?page=panier');
         exit();
-        
+    }
+
+    $pdo = getPDO();
+    $pdo->beginTransaction();
+
+    try {
+        // Calcul du montant total
+        $montantTotal = 0;
+        foreach ($panier as $livre_id => $quantite) {
+            $livre = Livre::getById($livre_id);
+            if ($livre) {
+                $montantTotal += $livre['prix'] * $quantite;
+            }
+        }
+
+        // Création de la commande (statut = "payée (simulation)")
+        $stmt = $pdo->prepare("INSERT INTO commande (user_id, date, statut, montant_total) VALUES (?, NOW(), ?, ?)");
+        $stmt->execute([$_SESSION['user_id'], 'payée (simulation)', $montantTotal]);
+        $commandeId = $pdo->lastInsertId();
+
+        // Insertion des lignes de commande
+        foreach ($panier as $livre_id => $quantite) {
+            $livre = Livre::getById($livre_id);
+            if ($livre) {
+                $stmt = $pdo->prepare("INSERT INTO lignecommande (commande_id, livre_id, quantité, prix_unitaire) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$commandeId, $livre_id, $quantite, $livre['prix']]);
+            }
+        }
+
+        // Vider le panier
+        unset($_SESSION['panier']);
+        $pdo->commit();
+
+        // Redirection vers la page de confirmation
+        header('Location: index.php?page=confirmation_commande&id=' . $commandeId);
+        exit();
+
     } catch (Exception $e) {
-        error_log("ERREUR: " . $e->getMessage());
-        $_SESSION['error'] = "Erreur technique. Veuillez réessayer.";
+        $pdo->rollBack();
+        $_SESSION['error'] = "Erreur lors de la validation de la commande : " . $e->getMessage();
         header('Location: index.php?page=panier');
         exit();
     }
 }
 
-
-
-
-    public function confirmation() {
-        require 'Vue/commandes/confirmation.php';
+public function confirmation() {
+    // Vérifier l'existence de l'ID de commande
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        header('Location: index.php?page=panier');
+        exit();
     }
+    
+    $commandeId = (int)$_GET['id'];
+    $pdo = getPDO();
+    
+    // Récupérer les détails de la commande
+    $stmt = $pdo->prepare("
+        SELECT c.date, c.statut, c.montant_total, u.email 
+        FROM commande c
+        JOIN user u ON c.user_id = u.id
+        WHERE c.id = ?
+    ");
+    // Correction de la requête pour utiliser le bon nom de colonne
+    $stmt->execute([$commandeId]);
+    $commande = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    public function historique() {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: index.php?page=connexion');
-            exit();
-        }
-        
-        $commandes = Commande::getByUserId($_SESSION['user_id']);
-        require 'Vue/commandes/historique.php';
+    // Récupérer les articles de la commande
+    $stmt = $pdo->prepare("
+        SELECT l.titre, lc.quantité, lc.prix_unitaire
+        FROM lignecommande lc
+        JOIN livre l ON lc.livre_id = l.id
+        WHERE lc.commande_id = ?
+    ");
+    $stmt->execute([$commandeId]);
+    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    require 'Vue/commandes/confirmation_commande.php';
 }
-public function clearPanier() {
-    if (isset($_SESSION['panier'])) {
-        unset($_SESSION['panier']);
+public function historique() {
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php?page=connexion');
+        exit();
     }
+
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("
+        SELECT id, date, statut, montant_total 
+        FROM commande 
+        WHERE user_id = ? 
+        ORDER BY date DESC
+    ");
+    $stmt->execute([$_SESSION['user_id']]);
+    $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    require 'Vue/commandes/historique_commandes.php';
+}
+
+
+
+public function clearPanier() {
+    // Vérifier que l'utilisateur est connecté
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php?page=connexion');
+        exit();
+    }
+
+    // Vider le panier
+    unset($_SESSION['panier']);
+    $_SESSION['success'] = "Votre panier a été vidé avec succès.";
     header('Location: index.php?page=panier');
     exit();
 }
-
 }
 ?>

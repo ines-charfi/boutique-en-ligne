@@ -76,6 +76,32 @@ class Commande
         $result = $query->fetch();
         return $result['total'];
     }
+
+    public function delete($id) {
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("DELETE FROM commande WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+
+    public function getAll() {
+        $pdo = getPDO();
+        $stmt = $pdo->query("SELECT * FROM commande");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getByIdWithDetails($id) {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("
+            SELECT c.*, u.email AS user_email, l.titre, lc.quantité, lc.prix_unitaire
+            FROM commande c
+            JOIN user u ON c.user_id = u.id
+            LEFT JOIN lignecommande lc ON c.id = lc.commande_id
+            LEFT JOIN livre l ON lc.livre_id = l.id
+            WHERE c.id = ?
+        ");
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
     

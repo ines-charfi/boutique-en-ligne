@@ -103,6 +103,11 @@ switch ($page) {
     case 'valider_commande':
         (new CommandeController())->validerCommande();
         break;
+       
+    case 'confirmation_commande':
+        (new CommandeController())->confirmation();
+    break;
+
     case 'clear_panier':
         (new CommandeController())->clearPanier();
         break;

@@ -260,8 +260,6 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .container ul li a {
-    width: 100%;
-    text-align: center;
     display: block;
     padding: 1.1rem 0.5rem;
     background: #ffe066;

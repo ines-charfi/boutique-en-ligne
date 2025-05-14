@@ -237,5 +237,72 @@ public function editLivre() {
     require 'Vue/admin/edit-livre.php';
 }
 
+
+    public function deleteCommande() {
+        // Implémente la logique de suppression d'une commande ici
+        // Exemple basique :
+        if (isset($_GET['id'])) {
+            $commandeId = intval($_GET['id']);
+            // Appelle le modèle pour supprimer la commande
+            require_once 'model/Commande.php';
+            $commandeModel = new Commande();
+            $commandeModel->delete($commandeId);
+            // Redirige ou affiche un message de succès
+            header('Location: index.php?page=admin_commandes');
+            exit;
+        } else {
+            echo "ID de commande manquant.";
+        }
+    }
+    public function moderateAvis() {
+    // Vérification du rôle admin
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header('Location: index.php?page=connexion');
+        exit();
+    }
+
+    // Vérification de l'ID de l'avis
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        header('Location: index.php?page=admin_avis');
+        exit();
+    }
+
+    $avisId = (int)$_GET['id'];
+    $pdo = getPDO();
+
+    // Mettre à jour l'avis pour le marquer comme modéré
+    $stmt = $pdo->prepare("UPDATE avis SET modere = 1 WHERE id = ?");
+    $stmt->execute([$avisId]);
+
+    // Retour à la liste des avis admin
+    header('Location: index.php?page=admin_avis');
+    exit();
 }
+public function unmoderateAvis() {
+    // Vérification du rôle admin
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header('Location: index.php?page=connexion');
+        exit();
+    }
+
+    // Vérification de l'ID de l'avis
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        header('Location: index.php?page=admin_avis');
+        exit();
+    }
+
+    $avisId = (int)$_GET['id'];
+    $pdo = getPDO();
+
+    // Mettre à jour l'avis pour le marquer comme non modéré
+    $stmt = $pdo->prepare("UPDATE avis SET modere = 0 WHERE id = ?");
+    $stmt->execute([$avisId]);
+
+    // Retour à la liste des avis admin
+    header('Location: index.php?page=admin_avis');
+    exit();
+}
+}
+
+?>
 
