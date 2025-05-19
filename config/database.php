@@ -16,7 +16,7 @@ class Database {
     private $pdo;
 
     private function __construct() {
-        $config = require 'config/database.php';
+        $config = require './config/database.php';
         try {
             $this->pdo = new PDO(
                 "mysql:host={$config['localhost']};dbname={$config['boutique']};charset=utf8",

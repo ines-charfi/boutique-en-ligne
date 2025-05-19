@@ -12,7 +12,7 @@
 <?php
 
 // Inclusion de la base de données
-require_once  'config\database.php';
+require_once  './config/database.php';
 // Inclusion de la classe de base de données
  
 

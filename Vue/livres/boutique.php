@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boutique en ligne</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <script src="assets/js/boutique.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 </head>
 <body>
     
-<?php include  'Vue\bases\header.php'; ?>
+<?php include  './Vue/bases/header.php'; ?>
 <button class="btn" onclick="window.location.href='index.php'">Retour à l'accueil</button>
 
 <div class="container">
@@ -27,7 +27,7 @@
     <div id="livres-grid" class="books-grid">
         <?php foreach($livres as $livre): ?>
             <div class="book-card">
-                <img src="assets/images\<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
+                <img src="assets/images/<?= htmlspecialchars($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
                 <h3><?= htmlspecialchars($livre['titre']) ?></h3>
                 <p><?= htmlspecialchars($livre['auteur']) ?></p>
            
@@ -54,5 +54,5 @@
 
 
 </body>
-    <?php include 'Vue\bases\footer.php'; ?>
+    <?php include './Vue/bases/footer.php'; ?>
 </html>
