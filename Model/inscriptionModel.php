@@ -40,15 +40,10 @@ class InscriptionModel {
             // Hachage du mot de passe
             $hashedPassword = password_hash($userData['mot_de_passe'], PASSWORD_DEFAULT);
             
-            $stmt->bindParam(':nom', $userData['nom']);
-            $stmt->bindParam(':prenom', $userData['prenom']);
+        
             $stmt->bindParam(':email', $userData['email']);
             $stmt->bindParam(':mot_de_passe', $hashedPassword);
-            $stmt->bindParam(':adresse', $userData['adresse']);
-            $stmt->bindParam(':code_postal', $userData['code_postal']);
-            $stmt->bindParam(':ville', $userData['ville']);
-            $stmt->bindParam(':telephone', $userData['telephone']);
-            
+  
             $stmt->execute();
             
             return $this->db->lastInsertId();
